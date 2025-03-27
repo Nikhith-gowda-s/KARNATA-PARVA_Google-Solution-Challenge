@@ -17,7 +17,7 @@
 |----------------|--------------------|
 | **Frontend**   | HTML5, CSS3, JavaScript |
 | **AI Engine**  | Google Gemini API *(Planned Integration)* |
-| **Hosting**    | GitHub Pages       |
+| **Hosting**    |  Firebase Hosting       |
 
 ## 🔍 How It Works  
 1. **Input**  
