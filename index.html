@@ -1,15 +1,514 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Fake News Detector</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector | KARNATA PARVA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --google-blue: #4285F4;
+            --google-red: #EA4335;
+            --google-yellow: #FBBC05;
+            --google-green: #34A853;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, 
+                var(--google-blue) 0%, 
+                var(--google-red) 25%, 
+                var(--google-yellow) 50%, 
+                var(--google-green) 75%, 
+                var(--google-blue) 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .gdg-badge {
+            background: linear-gradient(to right, var(--google-blue), var(--google-green));
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #333;
+            line-height: 1.3;
+        }
+        
+        .team-name {
+            font-weight: bold;
+            margin: 15px 0;
+            color: var(--google-red);
+        }
+        
+        .tab-buttons {
+            display: flex;
+            margin: 15px 0;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #777;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            color: var(--google-blue);
+            border-bottom: 3px solid var(--google-blue);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--google-blue);
+        }
+        
+        .upload-area i {
+            font-size: 40px;
+            color: var(--google-blue);
+            margin-bottom: 10px;
+        }
+        
+        #file-input {
+            display: none;
+        }
+        
+        #preview-container {
+            display: none;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        #image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+        }
+        
+        .remove-image {
+            color: var(--google-red);
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        
+        button {
+            background: linear-gradient(to right, var(--google-blue), var(--google-green));
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: left;
+        }
+        
+        .result h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        
+        .error-message {
+            color: var(--google-red);
+            font-weight: 600;
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>Fake News Detector</h1>
-  <textarea id="newsInput" placeholder="Paste news article here..." rows="10" cols="50"></textarea>
-  <br><br>
-  <button onclick="checkNews()">Check News</button>
-  <h2 id="result"></h2>
+    <div class="container">
+        <div class="gdg-badge">GDG Solution Challenge 2025</div>
+        <h1>Welcome to Fake<br>News Detector</h1>
+        
+        <p>Paste a news article below to check its authenticity</p>
+        
+        <div class="team-name">Team KARNATA PARVA</div>
+        
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="text-tab">Text</button>
+            <button class="tab-btn" data-tab="image-tab">Image</button>
+        </div>
+        
+        <div id="text-tab" class="tab-content active">
+            <textarea placeholder="Copy and paste the news article you want to verify here..."></textarea>
+            <button id="check-text-btn">
+                Check Text Authenticity
+            </button>
+        </div>
+        
+        <div id="image-tab" class="tab-content">
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Click to upload image or drag and drop</p>
+                <p><small>Supports JPG, PNG (Max 5MB)</small></p>
+                <input type="file" id="file-input" accept="image/jpeg,image/png">
+            </div>
+            
+            <div id="preview-container">
+                <img id="image-preview" src="#" alt="Preview">
+                <div class="remove-image" id="remove-image">Remove Image</div>
+            </div>
+            
+            <div id="image-error" class="error-message"></div>
+            
+            <button id="check-image-btn" disabled>
+                Check Image Authenticity
+            </button>
+        </div>
+        
+        <div class="result" id="result">
+            <h3>Analysis Result:</h3>
+            <p id="result-text">Results will appear here after analysis</p>
+        </div>
+        
+        <div class="footer">
+            Combating misinformation with AI | Google Developer Groups
+        </div>
+    </div>
 
-  <script src="script.js"></script>
+    <script>
+        // Constants
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+        const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png'];
+        
+        // DOM Elements
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const fileInput = document.getElementById('file-input');
+        const imagePreview = document.getElementById('image-preview');
+        const previewContainer = document.getElementById('preview-container');
+        const uploadArea = document.getElementById('upload-area');
+        const removeImageBtn = document.getElementById('remove-image');
+        const checkImageBtn = document.getElementById('check-image-btn');
+        const imageError = document.getElementById('image-error');
+        const checkTextBtn = document.getElementById('check-text-btn');
+        const resultText = document.getElementById('result-text');
+        const textarea = document.querySelector('textarea');
+        
+        // Initialize the application
+        function init() {
+            setupTabSwitching();
+            setupImageUpload();
+            setupTextAnalysis();
+        }
+        
+        // Tab switching functionality
+        function setupTabSwitching() {
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Update active tab content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(tabId).classList.add('active');
+                    
+                    // Clear results when switching tabs
+                    resultText.textContent = "Select a tab and submit content for analysis";
+                });
+            });
+        }
+        
+        // Image upload and analysis setup
+        function setupImageUpload() {
+            // Click to upload
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            // Drag and drop handlers
+            uploadArea.addEventListener('dragover', handleDragOver);
+            uploadArea.addEventListener('dragleave', handleDragLeave);
+            uploadArea.addEventListener('drop', handleDrop);
+            
+            // File input change handler
+            fileInput.addEventListener('change', handleFileSelect);
+            
+            // Remove image handler
+            removeImageBtn.addEventListener('click', removeImage);
+            
+            // Image analysis button
+            checkImageBtn.addEventListener('click', analyzeImage);
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--google-blue)';
+        }
+        
+        function handleDragLeave() {
+            uploadArea.style.borderColor = '#ddd';
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ddd';
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFileSelect();
+            }
+        }
+        
+        function handleFileSelect() {
+            imageError.textContent = '';
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            // Validate file type
+            if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+                imageError.textContent = 'Only JPG/PNG images are allowed';
+                return;
+            }
+            
+            // Validate file size
+            if (file.size > MAX_FILE_SIZE) {
+                imageError.textContent = 'File size must be less than 5MB';
+                return;
+            }
+            
+            // Display preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                uploadArea.style.display = 'none';
+                previewContainer.style.display = 'block';
+                checkImageBtn.disabled = false;
+            }
+            reader.readAsDataURL(file);
+        }
+        
+        function removeImage() {
+            fileInput.value = '';
+            uploadArea.style.display = 'block';
+            previewContainer.style.display = 'none';
+            checkImageBtn.disabled = true;
+            imageError.textContent = '';
+        }
+        
+        async function analyzeImage() {
+            const file = fileInput.files[0];
+            if (!file) {
+                imageError.textContent = 'Please select an image first';
+                return;
+            }
+            
+            // Show loading state
+            checkImageBtn.disabled = true;
+            checkImageBtn.textContent = "Analyzing...";
+            
+            try {
+                // In a real app, replace this with actual API call
+                const result = await mockImageAnalysis(file);
+                
+                // Display results
+                displayResult(result);
+            } catch (error) {
+                displayError('Error analyzing image. Please try again.');
+                console.error('Analysis error:', error);
+            } finally {
+                resetImageButton();
+            }
+        }
+        
+        function mockImageAnalysis(file) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const random = Math.random();
+                    if (random < 0.3) {
+                        resolve({
+                            title: "✅ Authentic Image",
+                            message: "No signs of manipulation detected",
+                            confidence: (80 + Math.random() * 15).toFixed(0),
+                            details: "This image appears to be original and unaltered."
+                        });
+                    } else if (random < 0.6) {
+                        resolve({
+                            title: "⚠️ Possible Manipulation",
+                            message: "Signs of potential editing detected",
+                            confidence: (60 + Math.random() * 20).toFixed(0),
+                            details: "The image shows inconsistencies that suggest digital alteration."
+                        });
+                    } else {
+                        resolve({
+                            title: "❌ Fake Image Detected",
+                            message: "This image contains manipulated content",
+                            confidence: (85 + Math.random() * 10).toFixed(0),
+                            details: "This image has been identified as part of known disinformation campaigns."
+                        });
+                    }
+                }, 2000);
+            });
+        }
+        
+        // Text analysis setup
+        function setupTextAnalysis() {
+            checkTextBtn.addEventListener('click', analyzeText);
+        }
+        
+        function analyzeText() {
+            const text = textarea.value.trim();
+            
+            if (!text) {
+                resultText.innerHTML = "⚠️ Please enter some text to analyze.";
+                return;
+            }
+            
+            // Show loading state
+            checkTextBtn.disabled = true;
+            checkTextBtn.textContent = "Analyzing...";
+            
+            // Simulate API call
+            setTimeout(() => {
+                const random = Math.random();
+                let result;
+                
+                if (random < 0.4) {
+                    result = {
+                        title: "✅ Credible Content",
+                        message: "This text appears to be trustworthy.",
+                        confidence: (80 + Math.random() * 10).toFixed(0)
+                    };
+                } else if (random < 0.7) {
+                    result = {
+                        title: "⚠️ Suspicious Content",
+                        message: "This text shows signs of potential misinformation.",
+                        confidence: (65 + Math.random() * 10).toFixed(0)
+                    };
+                } else {
+                    result = {
+                        title: "❌ Fake News Detected",
+                        message: "This text is likely to contain false information.",
+                        confidence: (85 + Math.random() * 10).toFixed(0),
+                        details: "The content matches known patterns of disinformation."
+                    };
+                }
+                
+                displayResult(result);
+                resetTextButton();
+            }, 1500);
+        }
+        
+        function displayResult(result) {
+            resultText.innerHTML = `
+                <strong>${result.title}</strong><br>
+                ${result.message}<br><br>
+                Confidence: ${result.confidence}%<br>
+                ${result.details ? `<br>${result.details}` : ''}
+            `;
+        }
+        
+        function displayError(message) {
+            resultText.textContent = message;
+        }
+        
+        function resetImageButton() {
+            checkImageBtn.disabled = false;
+            checkImageBtn.textContent = "Check Image Authenticity";
+        }
+        
+        function resetTextButton() {
+            checkTextBtn.disabled = false;
+            checkTextBtn.textContent = "Check Text Authenticity";
+        }
+        
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
