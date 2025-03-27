@@ -4,7 +4,7 @@
 **AI-Powered Misinformation Detection System**  
 *GDG Solution Challenge 2025 Submission | Team KARNATA PARVA*  
 
-![App Demo](https://raw.githubusercontent.com/Nikhith-gowda-s/KARNATA-PARVA_Google-Solution-Challenge/main/assets/demo-screenshot.png)  
+![App ](https://karnataparva.web.app/)  
 
 ## 🌟 Key Features  
 - **Dual-Mode Analysis**  
