@@ -13,18 +13,6 @@
 - **Educational Reports** explaining why content is flagged
 
 
-### 🔧 Customization Guide:
-1. **Replace placeholders**:
-   - `your-username` → Your GitHub username
-   - `your-deployment-link` → Vercel/Netlify/Firebase URL
-   - `your-video-id` → YouTube demo video ID
-   - Add actual team member names
-
-2. **Add media files**:
-   - Place screenshots in `/assets` folder
-   - Recommended names:
-     - `demo.png` (main screenshot)
-     - `preview.gif` (screen recording)
 
 3. **For Gemini API integration**, add this section:
    ```markdown
