@@ -31,14 +31,11 @@
      - ⚠️ Suspicious (50-79% confidence)  
      - ❌ Fake Detected (0-49% confidence)  
 
-##For Gemini API integration**, add this section:
-   ```markdown
-   ## 🔑 API Setup
-   1. Get Google API key from [AI Studio](https://aistudio.google.com/)
-   2. Create `.env` file:
-      ```env
-      GEMINI_API_KEY=your_actual_key
-      ```
+## 👥 Team KARNATA PARVA
+- Nikhith Gowda S (Team Lead)
+- Manoj S
+- Girish G R
+- Byresh K N
 
 ## 🚀 Quick Start  
 1. **Clone the repository**:  
