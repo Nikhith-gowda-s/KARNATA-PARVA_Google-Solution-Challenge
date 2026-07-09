@@ -1,16 +1,16 @@
 # KARNATA-PARVA_Google-Solution-Challenge
 
-# 🕵️ Fake News Detector  
+#  Fake News Detector  
 **AI-Powered Misinformation Detection System**  
 *GDG Solution Challenge 2025 Submission | Team KARNATA PARVA*  
 
-## 🌟 Live Demo Link :
-➡️ **https://karnataparva.web.app*
+##  Live Demo Link :
+ **https://karnataparva.web.app*
 
-## 🌟 Key Features  
+##  Key Features  
 - **Dual-Mode Analysis**  
-  - 📝 Text verification using NLP  
-  - 🖼️ Image/meme authenticity check  
+  -  Text verification using NLP  
+  -  Image/meme authenticity check  
 - **Real-Time Results** with confidence percentages  
 - **Educational Reports** explaining why content is flagged
 
@@ -33,7 +33,7 @@
      - ⚠️ Suspicious (50-79% confidence)  
      - ❌ Fake Detected (0-49% confidence)  
 
-## 👥 Team KARNATA PARVA
+##  Team KARNATA PARVA
 - Nikhith Gowda S (Team Lead)
 - Manoj S
 - Girish G R
