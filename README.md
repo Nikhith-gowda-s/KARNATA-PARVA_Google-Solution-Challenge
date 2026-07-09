@@ -5,7 +5,7 @@
 *GDG Solution Challenge 2025 Submission | Team KARNATA PARVA*  
 
 ##  Live Demo Link :
- **https://karnataparva.web.app*
+ *https://karnataparva.web.app*
 
 ##  Key Features  
 - **Dual-Mode Analysis**  
