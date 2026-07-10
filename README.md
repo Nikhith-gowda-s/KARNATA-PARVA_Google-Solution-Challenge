@@ -37,7 +37,6 @@
 - Nikhith Gowda S (Team Lead)
 - Manoj S
 - Girish G R
-- Byresh K N
 
 ## 🚀 Quick Start  
 1. **Clone the repository**:  
