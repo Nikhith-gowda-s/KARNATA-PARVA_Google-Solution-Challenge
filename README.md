@@ -14,14 +14,14 @@
 - **Real-Time Results** with confidence percentages  
 - **Educational Reports** explaining why content is flagged
 
-## 🛠️ Technology Stack  
+## Technology Stack  
 | Component       | Technology          |
 |----------------|--------------------|
 | **Frontend**   | HTML5, CSS3, JavaScript |
 | **AI Engine**  | Google Gemini API *(Planned Integration)* |
 | **Hosting**    |  Firebase Hosting       |
 
-## 🔍 How It Works  
+## How It Works  
 1. **Input**  
    - Paste suspicious text *or* upload image  
 2. **Analysis**  
